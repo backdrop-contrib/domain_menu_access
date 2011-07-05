@@ -44,12 +44,12 @@ function domain_menu_access_translated_menu_link_alter(&$item, $map) {
   // the menu item could be disabled completely by accident.
   if (arg(0) != 'admin') {
     // Process menu items to be shown per domain.
-    if (isset($item['options']['domains']['show']) && count($item['options']['domains']['show'])) {
-      $item['hidden'] = ($item['options']['domains']['show']['d' . $_domain['domain_id']]) ? FALSE : TRUE;
+    if (isset($item['options']['domain_menu_access']['show']) && count($item['options']['domain_menu_access']['show'])) {
+      $item['hidden'] = ($item['options']['domain_menu_access']['show']['d' . $_domain['domain_id']]) ? FALSE : TRUE;
     }
     // Process menu items to be hidden per domain.
-    if (isset($item['options']['domains']['hide']['d' . $_domain['domain_id']])) {
-      $item['hidden'] = ($item['options']['domains']['hide']['d' . $_domain['domain_id']]) ? TRUE : FALSE;
+    if (isset($item['options']['domain_menu_access']['hide']['d' . $_domain['domain_id']])) {
+      $item['hidden'] = ($item['options']['domain_menu_access']['hide']['d' . $_domain['domain_id']]) ? TRUE : FALSE;
     }
   }
 }

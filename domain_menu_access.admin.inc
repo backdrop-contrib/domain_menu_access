@@ -11,8 +11,8 @@
 function domain_menu_access_form_menu_edit_item_alter(&$form, &$form_state) {
   if (user_access('administer menus per domain')) {
     // Load default values.
-    $show_default_value = (isset($form['menu']['options']['#value']['domains']['show'])) ? $form['menu']['options']['#value']['domains']['show'] : array();
-    $hide_default_value = (isset($form['menu']['options']['#value']['domains']['hide'])) ? $form['menu']['options']['#value']['domains']['hide'] : array();
+    $show_default_value = (isset($form['menu']['options']['#value']['domain_menu_access']['show'])) ? $form['menu']['options']['#value']['domain_menu_access']['show'] : array();
+    $hide_default_value = (isset($form['menu']['options']['#value']['domain_menu_access']['hide'])) ? $form['menu']['options']['#value']['domain_menu_access']['hide'] : array();
     // If any of domain boxes are selected, display fieldset as expanded.
     $collapsed = (count($show_default_value) || count($hide_default_value)) ? FALSE : TRUE;
     $form['domain_menu_access']['manage'] = array(
@@ -79,20 +79,20 @@ function domain_menu_access_form_menu_edit_item_validate($form, &$form_state) {
 function domain_menu_access_form_menu_edit_item_submit($form, &$form_state) {
   if ($form_state['submitted'] && user_access('administer menus per domain')) {
     // Clear previous domain access values.
-    $form_state['values']['menu']['options']['domains'] = array(
+    $form_state['values']['menu']['options']['domain_menu_access'] = array(
       'show' => array(),
       'hide' => array(),
     );
     // Process showing menu item per domain.
     foreach ($form_state['values']['domain_menu_access_show'] as $key => $value) {
       if ($value) {
-        $form_state['values']['menu']['options']['domains']['show'][$key] = $key;
+        $form_state['values']['menu']['options']['domain_menu_access']['show'][$key] = $key;
       }
     }
     // Process hiding menu item per domain.
     foreach ($form_state['values']['domain_menu_access_hide'] as $key => $value) {
       if ($value) {
-        $form_state['values']['menu']['options']['domains']['hide'][$key] = $key;
+        $form_state['values']['menu']['options']['domain_menu_access']['hide'][$key] = $key;
       }
     }
     // Set 'alter' flag to true for this menu item, otherwise
