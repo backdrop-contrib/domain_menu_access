@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Extension for Domain module, which allows showing/hiding menu items per domain.
+ * Domain Menu Access module admin functions.
  */
 
 /**
@@ -20,6 +20,7 @@ function domain_menu_access_form_menu_edit_item_alter(&$form, &$form_state) {
       '#title'          => t('Manage item visibility per domain'),
       '#collapsible'    => TRUE,
       '#collapsed'      => $collapsed,
+      '#description'    => '<p>' . t('This section allows to show or hide this menu item on selected domains. See <a href="@help_url">module help</a> for more information.', array('@help_url' => url('admin/help/domain_menu_access'))) . '</p>',
     );
     // Get list of all available domains.
     // Add 'd' to array keys so it is saved properly even for domain_id = 0.
@@ -43,6 +44,12 @@ function domain_menu_access_form_menu_edit_item_alter(&$form, &$form_state) {
       '#default_value'  => $hide_default_value,
       '#description'    => t('Hide this menu item on selected domain(s). If you select no domains, the menu item will be visible on all domains.'),
     );
+    // Add weight to Submit button, as it is not set by default by menu.module,
+    // and because it sets weight of Delete button, it could happen that our
+    // fieldset is displayed between Save and Delete buttons.
+    $form['submit']['#weight'] = 9;
+    // Add own validate function to avoid one menu item
+    // being both displayed and hidden for the same domain.
     $form['#validate'][] = 'domain_menu_access_form_menu_edit_item_validate';
     // Make sure that our submit is called before menu_edit_item_submit()
     // from Drupal core menu.admin.inc, as there the changes are being saved.
@@ -88,5 +95,9 @@ function domain_menu_access_form_menu_edit_item_submit($form, &$form_state) {
         $form_state['values']['menu']['options']['domains']['hide'][$key] = $key;
       }
     }
+    // Set 'alter' flag to true for this menu item, otherwise
+    // hook_translated_menu_link_alter() will not be invoked:
+    // http://api.drupal.org/api/drupal/developer--hooks--core.php/function/hook_translated_menu_link_alter/6
+    $form_state['values']['menu']['options']['alter'] = TRUE;
   }
 }
