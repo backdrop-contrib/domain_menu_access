@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Extension for Domain module, which allows showing/hiding menu items per domain.
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function domain_menu_access_init() {
+  module_load_include('admin.inc', 'domain_menu_access');
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function domain_menu_access_perm() {
+  return array(
+    'administer menus per domain',
+  );
+}
+
+/**
+ * Implementation of hook_translated_menu_link_alter().
+ */
+function domain_menu_access_translated_menu_link_alter(&$item, $map) {
+  global $_domain;
+  // Do not hide menu items when in admin section, as then
+  // the menu item could be disabled completely by accident.
+  if (arg(0) != 'admin') {
+    // Process menu items to be shown per domain.
+    if (isset($item['options']['domains']['show']) && count($item['options']['domains']['show']) && !$item['options']['domains']['show']['d' . $_domain['domain_id']]) {
+      $item['hidden'] = TRUE;
+    }
+    // Process menu items to be hidden per domain.
+    if (isset($item['options']['domains']['hide']['d' . $_domain['domain_id']]) && $item['options']['domains']['hide']['d' . $_domain['domain_id']]) {
+      $item['hidden'] = TRUE;
+    }
+  }
+}

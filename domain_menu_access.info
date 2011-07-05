@@ -1,0 +1,5 @@
+name = Domain Menu Access
+description = Allows restricting access to menu items per domain.
+package = Domain Access
+dependencies[] = domain
+core = 6.x
