@@ -12,22 +12,21 @@ displayed on selected domains even if disabled by default.
 Installation
 ------------
 
- * Copy the domain_menu_access folder to the modules folder
+ * Download/checkout the domain_menu_access folder to the modules folder
    in your installation.
 
- * Enable the module using Administer / Site building / Modules
-   (/admin/build/modules).
+ * Enable the module using Administer / Modules (/admin/modules).
 
- * Grant 'administer menus per domain' permission to relevant
-   admin users using Administer / User management / Permissions
-   (/admin/user/permissions)
+ * Grant 'Administer menus per domain' permission to relevant
+   admin users using Administer / People / Permissions
+   (/admin/people/permissions)
 
 
 Usage
 -----
 
 Access to all menu items is managed on standard admin "Edit menu item"
-pages in Admin / Site building / Menus, separately for each menu item,
+pages in Admin / Structure / Menus, separately for each menu item,
 using domain checkboxes in "Manage item visibility per domain" fieldset.
 
 Use "Show menu item" checkboxes to force displaying items which by default
