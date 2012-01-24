@@ -95,9 +95,22 @@ function domain_menu_access_form_menu_edit_item_submit($form, &$form_state) {
         $form_state['values']['options']['domain_menu_access']['hide'][$key] = $key;
       }
     }
-    // Set 'alter' flag to true for this menu item, otherwise
-    // hook_translated_menu_link_alter() will not be invoked:
+    // Verify that at least one checkbox for 'show' and for 'hide' was ticked.
+    // Otherwise just unset relevant arrays, as no point in saving them then.
+    if (count($form_state['values']['options']['domain_menu_access']['show']) == 0) {
+      unset($form_state['values']['options']['domain_menu_access']['show']);
+    }
+    if (count($form_state['values']['options']['domain_menu_access']['hide']) == 0) {
+      unset($form_state['values']['options']['domain_menu_access']['hide']);
+    }
+    if (count($form_state['values']['options']['domain_menu_access']) == 0) {
+      unset($form_state['values']['options']['domain_menu_access']);
+    }
+    // Set 'alter' flag to true for this menu item if it was modified, 
+    // otherwise hook_translated_menu_link_alter() will not be invoked:
     // http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_translated_menu_link_alter/7
-    $form_state['values']['options']['alter'] = TRUE;
+    if (isset($form_state['values']['options']['domain_menu_access'])) {
+      $form_state['values']['options']['alter'] = TRUE;
+    }
   }
 }
