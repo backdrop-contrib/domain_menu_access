@@ -6,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
 function domain_menu_access_form_menu_edit_item_alter(&$form, &$form_state) {
   if (user_access('administer menus per domain')) {
@@ -14,7 +14,7 @@ function domain_menu_access_form_menu_edit_item_alter(&$form, &$form_state) {
     $show_default_value = (isset($form['original_item']['#value']['options']['domain_menu_access']['show'])) ? $form['original_item']['#value']['options']['domain_menu_access']['show'] : array();
     $hide_default_value = (isset($form['original_item']['#value']['options']['domain_menu_access']['hide'])) ? $form['original_item']['#value']['options']['domain_menu_access']['hide'] : array();
     // If any of domain boxes are selected, display fieldset as expanded.
-    $collapsed = (count($show_default_value) || count($hide_default_value)) ? FALSE : TRUE;
+    $collapsed = (count($show_default_value) || count($hide_default_value))?FALSE : TRUE;
     $form['domain_menu_access']['manage'] = array(
       '#type' => 'fieldset',
       '#title' => t('Manage item visibility per domain'),
@@ -52,7 +52,7 @@ function domain_menu_access_form_menu_edit_item_alter(&$form, &$form_state) {
     // being both displayed and hidden for the same domain.
     $form['#validate'][] = 'domain_menu_access_form_menu_edit_item_validate';
     // Make sure that our submit is called before menu_edit_item_submit()
-    // from Drupal core menu.admin.inc, as there the changes are being saved.
+    // from Backdrop core menu.admin.inc, as there the changes are being saved.
     array_unshift($form['#submit'], 'domain_menu_access_form_menu_edit_item_submit');
   }
 }
@@ -106,9 +106,9 @@ function domain_menu_access_form_menu_edit_item_submit($form, &$form_state) {
     if (count($form_state['values']['options']['domain_menu_access']) == 0) {
       unset($form_state['values']['options']['domain_menu_access']);
     }
-    // Set 'alter' flag to true for this menu item if it was modified, 
+    // Set 'alter' flag to true for this menu item if it was modified,
     // otherwise hook_translated_menu_link_alter() will not be invoked:
-    // http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_translated_menu_link_alter/7
+    // http://api.drupal.org/api/backdrop/modules--system--system.api.php/function/hook_translated_menu_link_alter/7
     if (isset($form_state['values']['options']['domain_menu_access'])) {
       $form_state['values']['options']['alter'] = TRUE;
     }
