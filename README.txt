@@ -1,3 +1,5 @@
+Domain Menu Access
+=======
 
 Domain Menu Access is an extension to Domain module, allowing
 administrators to configure visitors' access to selected
@@ -5,21 +7,18 @@ menu items based on current domain they are viewing.
 
 It lets administrators decide whether a specific menu item
 should be hidden on selected domains (regardless of it being enabled
-by default using standard Drupal functionality), or should it be
+by default using standard Backdrop CMS functionality), or should it be
 displayed on selected domains even if disabled by default.
 
 
 Installation
 ------------
 
- * Download/checkout the domain_menu_access folder to the modules folder
-   in your installation.
+ - Install this module using the [official Backdrop CMS instructions](https://backdropcms.org/guide/modules).
 
- * Enable the module using Administer / Modules (/admin/modules).
-
- * Grant 'Administer menus per domain' permission to relevant
+ - Grant 'Administer menus per domain' permission to relevant
    admin users using Administer / People / Permissions
-   (/admin/people/permissions)
+   (/configuration/people/permissions)
 
 
 Usage
@@ -37,12 +36,24 @@ are enabled.
 
 Note that these settings will be ignored in administration area,
 which means that all menu items will be enabled or disabled based
-on default Drupal settings only, as otherwise default state
+on default Backdrop CMS settings only, as otherwise default state
 of a menu item could be changed by accident.
 
 
-Author/maintainer
------------------
+Issues
+------
 
-Maciej Zgadzaj
-http://drupal.org/user/271491
+Bugs and Feature requests should be reported in the Issue Queue:
+https://github.com/backdrop-contrib/domain_menu_access/issues.
+
+
+Current Maintainers
+-------------------
+
+- [Tim Erickson](https://github.com/stpaultim)
+- [Sudipto Kumar Mitra (sudipto68)](https://github.com/sudipto68)
+
+Credits
+-------
+
+- Domain Menu Access was written by Maciej Zgadzaj [Zgadzaj](http://drupal.org/user/271491).
