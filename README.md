@@ -56,4 +56,4 @@ Current Maintainers
 Credits
 -------
 
-- Domain Menu Access was written by Maciej Zgadzaj [Zgadzaj](http://drupal.org/user/271491).
+- Domain Menu Access was [ported from Drupal](https://www.drupal.org/project/domain_menu_access) where is was created by Maciej Zgadzaj [Zgadzaj](http://drupal.org/user/271491).
